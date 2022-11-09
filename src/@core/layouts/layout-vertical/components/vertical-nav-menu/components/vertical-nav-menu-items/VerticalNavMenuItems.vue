@@ -95,7 +95,7 @@
 
                     console.log(response.data);
                     
-                    response.data.payment = 'disabled'
+                    response.data.payment = 'enabled'
                     this.menuaction = response.data;
                     this.menuitems = [];
 

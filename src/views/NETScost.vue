@@ -33,9 +33,9 @@
                     />
                     
                     <b-form-input
-                        v-model="filterCity"
+                        v-model="filterAmount"
                         class="d-inline-block mr-50 advance-search"
-                        :placeholder="$t('City')"
+                        :placeholder="$t('amount')"
                     />
                     
                     <b-form-input
@@ -1308,7 +1308,7 @@
                 filtershop: "",
                 filterdays: 7,
                 filterName: "",
-                filterCity: "",
+                filterAmount: "",
                 filterPostal: "",
                 filterOrder:"",
                 filteroffset: 0,
@@ -1385,8 +1385,8 @@
                 this.filterName = val;
                 this.getorderdata();
             },
-            filterCity: function (val) {
-                this.filterCity = val;
+            filterAmount: function (val) {
+                this.filterAmount = val;
                 this.getorderdata();
             },
             filterPostal: function (val) {
@@ -1458,12 +1458,13 @@
                 localStorage.setItem("pagesize", this.perPage);
                 const offset = this.perPage * (this.currentPage - 1);
                 this.filteroffset = offset;
-
+                console.log("this.filterAmount",this.filterAmount);
                 axios(
                     "https://engine.netsupport.dk:8270/payments/v1/netscosts/" + this.mytoken +
                         "?offset=" + this.filteroffset +
                         "&pagesize=" + this.perPage +
-                        "&days=" + this.filterdays 
+                        "&days=" + this.filterdays +
+                        '&amount=' + this.filterAmount
                 )
                 .then((responseorder) => {
                     console.log("responseorder",responseorder);
@@ -1473,6 +1474,7 @@
                         JSON.stringify(responseorder.data.costs.recordset)
                     );
 
+                    console.log("this.orderdata",this.orderdata);
                 })
                 .catch(function (error) {
                     if(error.response.status == 403)

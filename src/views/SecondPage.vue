@@ -1468,7 +1468,7 @@
                         JSON.stringify(responseorder.data.orders.recordset)
                     );
 
-                    //console.log(this.orderdata);
+                    console.log(this.orderdata);
                 })
                 .catch(function (error) {
                     if(error.response.status == 403)
