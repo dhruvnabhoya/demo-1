@@ -7,7 +7,7 @@
                     md="8"
                     class="d-flex align-items-center justify-content-start mb-1 mb-md-0"
                 >
-                    <v-select
+                    <!-- <v-select
                         v-model="filtershop"
                         dir="ltr"
                         :options="shopOptions"            
@@ -19,17 +19,17 @@
                             {{ label }}
                         </span>
                         </template> 
-                    </v-select> &nbsp;
-                    <b-form-input
+                    </v-select> &nbsp; -->
+                    <!-- <b-form-input
                         v-model="filterOrder"
                         class="d-inline-block mr-50 advance-search"
                         :placeholder="$t('Order')"
-                    />
+                    /> -->
                     
                     <b-form-input
-                        v-model="filterName"
+                        v-model="filterAccount"
                         class="d-inline-block mr-50 advance-search"
-                        :placeholder="$t('Name')"
+                        :placeholder="$t('account')"
                     />
                     
                     <b-form-input
@@ -38,11 +38,11 @@
                         :placeholder="$t('amount')"
                     />
                     
-                    <b-form-input
+                    <!-- <b-form-input
                         v-model="filterPostal"
                         class="d-inline-block mr-50 advance-search"
                         :placeholder="$t('Postal')"
-                    />
+                    /> -->
                 </b-col>
                 <b-col>
                     <div class="d-flex align-items-center justify-content-end">
@@ -1307,7 +1307,7 @@
                 filter: "",
                 filtershop: "",
                 filterdays: 7,
-                filterName: "",
+                filterAccount: "",
                 filterAmount: "",
                 filterPostal: "",
                 filterOrder:"",
@@ -1381,8 +1381,8 @@
                 this.filtershop = val;
                 this.getorderdata();
             },
-            filterName: function (val) {
-                this.filterName = val;
+            filterAccount: function (val) {
+                this.filterAccount = val;
                 this.getorderdata();
             },
             filterAmount: function (val) {
@@ -1464,7 +1464,8 @@
                         "?offset=" + this.filteroffset +
                         "&pagesize=" + this.perPage +
                         "&days=" + this.filterdays +
-                        '&amount=' + this.filterAmount
+                        '&amount=' + this.filterAmount +
+                        '&account=' + this.filterAccount
                 )
                 .then((responseorder) => {
                     console.log("responseorder",responseorder);

@@ -7,7 +7,7 @@
                     md="8"
                     class="d-flex align-items-center justify-content-start mb-1 mb-md-0"
                 >
-                    <v-select
+                    <!-- <v-select
                         v-model="filtershop"
                         dir="ltr"
                         :options="shopOptions"            
@@ -19,7 +19,7 @@
                             {{ label }}
                         </span>
                         </template> 
-                    </v-select> &nbsp;
+                    </v-select> &nbsp; -->
                     <b-form-input
                         v-model="filterOrder"
                         class="d-inline-block mr-50 advance-search"
@@ -1296,7 +1296,6 @@
         directives: {
             Ripple
         },
-
         data() {
             return {
                 perPageOptions: [10, 20, 40, 60, 80, 100],
@@ -1474,7 +1473,7 @@
                         JSON.stringify(responseorder.data.payments.recordset)
                     );
 
-                    console.log(this.orderdata);
+                    console.log("this.orderdata",this.orderdata);
                 })
                 .catch(function (error) {
                     if(error.response.status == 403)
