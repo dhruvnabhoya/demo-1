@@ -60,19 +60,19 @@
                     "https://engine.netsupport.dk:8270/orders/v1/menues/" + this.mytoken   
                 )
                 .then((response) => {
-                    // response.data = {
-                    //     "dashboard": "enabled",
-                    //     "orders": "enabled",
-                    //     "WebShops": "disabled",
-                    //     "Inventory": "disabled",
-                    //     "transport": "enabled",
-                    //     "invoices": "disabled",
-                    //     "gdpr":"enabled",
-                    //     "Payment":"disabled",
-                    //     //"consignor": "enabled",
-                    //     "labels": "enabled",
-                    //     // "consignorpallets": "disabled"
-                    // }
+                    response.data = {
+                        "dashboard": "enabled",
+                        "orders": "enabled",
+                        "WebShops": "disabled",
+                        "Inventory": "disabled",
+                        "transport": "enabled",
+                        "invoices": "disabled",
+                        "gdpr":"enabled",
+                        "Payment":"disabled",
+                        //"consignor": "enabled",
+                        "labels": "enabled",
+                        // "consignorpallets": "disabled"
+                    }
                     // console.log("response============>>>",response);
                 
                     if(!response.data.gdpr){

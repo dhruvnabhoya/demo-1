@@ -21,9 +21,9 @@
                         </template> 
                     </v-select> &nbsp; -->
                     <b-form-input
-                        v-model="filterOrder"
+                        v-model="filterAccount"
                         class="d-inline-block mr-50 advance-search"
-                        :placeholder="$t('Order')"
+                        :placeholder="$t('Account')"
                     />
                     
                     <b-form-input
@@ -39,9 +39,9 @@
                     />
                     
                     <b-form-input
-                        v-model="filterPostal"
+                        v-model="filterAmount"
                         class="d-inline-block mr-50 advance-search"
-                        :placeholder="$t('Postal')"
+                        :placeholder="$t('amount')"
                     />
                 </b-col>
                 <b-col>
@@ -1307,8 +1307,8 @@
                 filterdays: 7,
                 filterName: "",
                 filterCity: "",
-                filterPostal: "",
-                filterOrder:"",
+                filterAmount: "",
+                filterAccount:"",
                 filteroffset: 0,
                 filterselectedOrder :"",
                 checkall:false,
@@ -1387,12 +1387,12 @@
                 this.filterCity = val;
                 this.getorderdata();
             },
-            filterPostal: function (val) {
-                this.filterPostal = val;
+            filterAmount: function (val) {
+                this.filterAmount = val;
                 this.getorderdata();
             },
-            filterOrder: function (val) {
-                this.filterOrder = val;
+            filterAccount: function (val) {
+                this.filterAccount = val;
                 this.getorderdata();
             },
             filteroffset: function (val) {
@@ -1462,7 +1462,7 @@
                         "?offset=" + this.filteroffset +
                         "&pagesize=" + this.perPage +
                         "&days=" + this.filterdays +
-                        "&order=" + this.filterOrder 
+                        "&order=" + this.filterAccount 
                 )
                 
                 .then((responseorder) => {
@@ -1473,7 +1473,11 @@
                         JSON.stringify(responseorder.data.payments.recordset)
                     );
 
-                    console.log("this.orderdata",this.orderdata);
+                    // console.log("this.orderdata",this.orderdata);
+                    // console.log("this.filterAmount",this.filterAmount)
+                   this.orderdata = this.orderdata.filter(ele => ele.amount.toLowerCase().includes(this.filterAmount.toLowerCase()))
+
+                   console.log("search_data",search_data);
                 })
                 .catch(function (error) {
                     if(error.response.status == 403)
