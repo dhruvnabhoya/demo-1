@@ -1404,7 +1404,6 @@
                 this.getorderdata();
             },
         },
-
         created() {
             console.log("shopOptions",this.shopOptions);
             this.mytoken = localStorage.getItem("token");
@@ -1475,7 +1474,10 @@
 
                     // console.log("this.orderdata",this.orderdata);
                     // console.log("this.filterAmount",this.filterAmount)
-                   this.orderdata = this.orderdata.filter(ele => ele.amount.toLowerCase().includes(this.filterAmount.toLowerCase()))
+
+
+                    // amount filter is correct //
+                    // this.orderdata = this.orderdata.filter(ele => ele.amount.toLowerCase().includes(this.filterAmount.toLowerCase()))    
 
                    console.log("search_data",search_data);
                 })

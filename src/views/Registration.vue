@@ -4,11 +4,18 @@
 
         <!-- Brand logo-->
         <b-link class="brand-logo">
-            <b-img fluid :src="loginUrl" alt="Login V2" class="login_logo_img" />
-            <h2 class="brand-text text-primary ml-1">
-                {{ $t('InteGreat') }}
-            </h2>
-        </b-link>
+                <b-img 
+                    fluid 
+                    :src="loginUrl" 
+                    alt="Login V2" 
+                    class="login_logo_img"
+                />
+                <!-- <h2 
+                    class="brand-text text-primary ml-1"
+                >
+                    {{ $t('InteGreat') }}
+                </h2> -->
+            </b-link>
         <!-- /Brand logo-->
 
         <!-- Left Text-->
@@ -183,7 +190,7 @@ export default {
         return {
             info_help_text: "",
             sideImg: require("@/assets/images/pages/forIG5_light.png"),
-            loginImg: require("@/assets/images/pages/new_login.png"),
+            loginImg: require("@/assets/images/logo/NewLogo.svg"),
             // validation
             required,
             email,
@@ -411,7 +418,21 @@ export default {
 
 <style lang="scss">
 @import '@core/scss/vue/pages/page-auth.scss';
-</style><style scoped>
+</style>
+<style scoped>
+
+    
+    .login_logo_img{
+        width: 100%;
+        max-width: 150px;
+    }
+    .brand-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
 .custom_fieldset {
     position: relative;
     border: 1px solid #575c68;
@@ -441,10 +462,6 @@ export default {
     white-space: pre;
 }
 
-.login_logo_img {
-    width: 100%;
-    max-width: 55px;
-}
 
 .brand-logo {
     display: flex;

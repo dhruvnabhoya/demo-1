@@ -2,10 +2,21 @@
   <!-- Error page-->
   <div class="misc-wrapper">
     <b-link class="brand-logo">
-      <vuexy-logo />
-      <h2 class="brand-text text-primary ml-1">
+      <span>
+                <b-img
+                class="Error_Logo"
+                  src="@/assets/images/logo/fulllogo(p).png"
+                  alt="logo"
+                />
+              </span>
+              <!-- <b-img class="brand-text"
+              id="BrandIcon"
+                src="@/assets/images/logo/normal(pic).png"
+                alt="logo"
+              /> -->
+      <!-- <h2 class="brand-text text-primary ml-1">
         Vuexy
-      </h2>
+      </h2> -->
     </b-link>
 
     <div class="misc-inner p-2 p-sm-3">
@@ -70,4 +81,15 @@ export default {
 
 <style lang="scss">
 @import '@core/scss/vue/pages/page-misc.scss';
+</style>
+
+
+<style scoped>
+.brand-logo img {
+        max-width: 45px;
+      }
+      img.Error_Logo {
+    width: 100%;
+    max-width: 150px !important;
+}
 </style>

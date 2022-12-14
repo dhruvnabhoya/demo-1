@@ -11,7 +11,6 @@
         :key="grp_index"
         class="suggestions-groups-list"
       >
-
         <!-- Group Header -->
         <p class="suggestion-group-title">
           <slot
@@ -23,7 +22,6 @@
             </span>
           </slot>
         </p>
-
         <!-- Suggestion List of each group -->
         <ul>
           <li
@@ -39,7 +37,6 @@
               <span>{{ suggestion[data[grp_name].key] }}</span>
             </slot>
           </li>
-
           <li
             v-if="!suggestion_list.length && searchQuery"
             class="suggestion-group-suggestion no-results"
@@ -56,10 +53,8 @@
     </ul>
   </div>
 </template>
-
 <script>
 import useAutoSuggest from './useAutoSuggest'
-
 export default {
   props: {
     inputProps: {
@@ -78,21 +73,17 @@ export default {
   setup(props, { emit }) {
     // eslint-disable-next-line no-console
     console.warn('This component is still in Development. Please do not use it.')
-
     const { searchQuery, filteredData, resetsearchQuery } = useAutoSuggest(props)
-
     const suggestionSelected = suggestion => {
       resetsearchQuery()
       emit('suggestion-selected', suggestion)
     }
-
     return {
       searchQuery, filteredData, suggestionSelected,
     }
   },
 }
 </script>
-
 <style scoped>
 ul
 {

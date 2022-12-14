@@ -30,11 +30,17 @@
                   alt="logo"
                 />
               </span>
-              <h2 class="brand-text">
+              <b-img class="brand-text"
+              id="BrandIcon"
+                src="@/assets/images/logo/normal(pic).png"
+                alt="logo"
+              />
+              <!-- <h2 >
                 {{ appName }}
-              </h2>
+              </h2> -->
             </b-link>
           </li>
+
 
           <!-- Toggler Button -->
           <li class="nav-item nav-toggle">
@@ -130,10 +136,8 @@ export default {
     }
 
     const collapseTogglerIconFeather = computed(() => (collapseTogglerIcon.value === 'unpinned' ? 'CircleIcon' : 'DiscIcon'))
-
     // App Name
     const { appName, appLogoImage } = $themeConfig.app
-
     return {
       navMenuItems,
       perfectScrollbarSettings,
@@ -163,4 +167,18 @@ export default {
 
 <style lang="scss">
   @import "~@core/scss/base/core/menu/menu-types/vertical-menu.scss";
+</style>
+
+<style scoped>
+img#BrandIcon {
+    width: 100%;
+    max-width: 130px;
+    padding:0px;
+}
+.brand-logo img {
+        max-width: 45px;
+      }
+.main-menu .navbar-header .navbar-brand {
+    margin-top: 6px;
+}
 </style>

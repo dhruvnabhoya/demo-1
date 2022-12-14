@@ -70,8 +70,9 @@
         created(){
             //console.log('navmenulink',this.item);
         },
-        methods: {
+        methods: {  
             reloadFunction(){
+
                 if(this.flag){
                     location.href = window.location.href 
                 }

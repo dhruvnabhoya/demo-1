@@ -9,11 +9,11 @@
                     alt="Login V2" 
                     class="login_logo_img"
                 />
-                <h2 
+                <!-- <h2 
                     class="brand-text text-primary ml-1"
                 >
                     {{ $t('InteGreat') }}
-                </h2>
+                </h2> -->
             </b-link>
             <!-- /Brand logo-->
 
@@ -185,7 +185,7 @@
             password: "",
             userEmail: "",
             sideImg: require("@/assets/images/pages/forIG5_light.png"),
-            loginImg: require("@/assets/images/pages/new_login.png"),
+            loginImg: require("@/assets/images/logo/NewLogo.svg"),
             // validation rulesimport store from '@/store/index'
             required,
             email,
@@ -273,7 +273,7 @@
     
     .login_logo_img{
         width: 100%;
-        max-width: 55px;
+        max-width: 150px;
     }
     .brand-logo {
         display: flex;
