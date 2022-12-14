@@ -7,8 +7,8 @@
             <!-- Col: Left (Invoice Container) -->
             <b-col
                 cols="12"
-                xl="9"
-                md="8"
+                xl="12"
+                md="12"
             >
                 <b-form @submit.prevent>
                     <b-card
@@ -80,7 +80,7 @@
                             <b-row class="invoice-spacing">
 
                                 <!-- Col: Invoice To -->
-                                <b-col cols="12" xl="12" class="p-0">
+                                <b-col cols="13" xl="12" class="p-0">
                                     <b-row> 
                                         <b-col cols="4">  
                                             <h6 class="mb-2">
@@ -218,6 +218,18 @@
                                             </p>
                                         </b-col>
                                     </b-row>
+                                        <b-row class="d-flex justify-content-end p-1">
+
+                                            <b-button
+                                            v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                        variant="primary"
+                        block
+                        class=" col-2 linebtn"
+                        @click="editOrder()"
+                        >
+                        {{ $t("Save") }}
+                    </b-button>
+                </b-row>
                                 </b-col>
                             </b-row>
                         </b-card-body>
@@ -462,18 +474,18 @@
                 </b-form>
             </b-col>
             <!-- Right Col: Card -->
-            <b-col
+            <!-- <b-col
                 cols="12"
                 md="4"
                 xl="3"
                 class="invoice-actions"
-            >
+            > -->
 
                 <!-- Action Buttons -->
-                <b-card>
+                <!-- <b-card> -->
 
                     <!-- Button: Send Invoice -->
-                    <b-button
+                    <!-- <b-button
                         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                         v-b-toggle.sidebar-send-invoice
                         variant="outline-primary"
@@ -481,9 +493,9 @@
                         block
                     >
                         {{ $t("Send to Economy") }}
-                    </b-button>
+                    </b-button> -->
                     <!-- Button: Send Invoice -->
-                    <b-button
+                    <!-- <b-button
                         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                         v-b-toggle.sidebar-send-invoice
                         variant="outline-primary"
@@ -491,10 +503,10 @@
                         block
                     >
                         {{ $t("Send to Customer") }}
-                    </b-button>
+                    </b-button> -->
 
                     <!-- Button: DOwnload -->
-                    <b-button
+                    <!-- <b-button
                         v-ripple.400="'rgba(113, 102, 240, 0.15)'"
                         variant="outline-primary"
                         class="mb-75"
@@ -502,32 +514,28 @@
                         :to="'/order-preview/'+ ordernumber +'/'+ shop"
                     >
                         {{ $t("Preview") }}
-                    </b-button>
+                    </b-button> -->
 
                     <!-- Button: Print -->
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="success"
-                        block
-                        @click="editOrder()"
-                    >
-                        {{ $t("Save") }}
-                    </b-button>
+                    
 
                     <!-- Button: Add Payment -->
-                    <b-button
+                    <!-- <b-button
                         v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                         variant="danger"
                         class="mb-75"
                         block
                     >
                         {{ $t("cancel order") }}
-                    </b-button>
-                </b-card>
-            </b-col>
+                    </b-button> -->
+                <!-- </b-card>
+            </b-col> -->
         </b-row>
     </section>
 </template>
+<script>
+    
+</script>
 <script>
     import axios from "axios";
     import Logo from '@core/layouts/components/Logo.vue'
@@ -596,6 +604,7 @@ export default {
             deleteorderline: {},
             ordernumber : this.$route.params.id,
             shop : this.$route.params.shop,
+            dirty_form: true,
 
             itemFormBlankItem:{
                 lineNumber:'',
@@ -622,8 +631,39 @@ export default {
     created() {
         this.getorderdata();
         this.getorderlinedata();
+
+    
+        window.addEventListener('beforeunload', this.confirm_leaving)
+
+        console.log(location.href)
     },
+//     beforeDestroy() {
+//   window.removeEventListener('beforeunload', this.handleRemove)
+// },
     methods: {
+        // handler(e) {
+        //     // console.log('e',e)
+            // debugger;
+        //     if(false) {
+        //         e.preventDefault();
+        //         const data = 'Are you sure you want to reload page?'
+        //         e.returnValue =  data
+        //         return data
+        //     }
+        //     // e?.preventDefault(); 
+        //     // e?.returnValue = '';
+        // },
+        confirm_leaving (evt) {
+            if (this.dirty_form) {
+                const unsaved_changes_warning = "You have unsaved changes. Are you sure you wish to leave?";
+                evt.returnValue = unsaved_changes_warning; 
+                return unsaved_changes_warning;
+            };
+        },
+    // },
+        // handleRemove(){
+        //     this.CheckSaveBtn = true
+        // },
         addNewItemInItemForm() {
             this.$refs.form.style.overflow = 'hidden'
             this.orderlinedata.push(JSON.parse(JSON.stringify(this.itemFormBlankItem)))
@@ -677,10 +717,10 @@ export default {
                 "&shop=" + this.shop
             )
             .then((responseorder) => {
-                //console.log(responseorder.data.order);
                 this.orderdata = JSON.parse(
                     JSON.stringify(responseorder.data.order)
                 );
+                console.log("this.orderdata",this.orderdata);
                 this.subtotal = Number(this.orderdata.nettoPrice).toFixed(2);
                 this.total = Number(this.orderdata.totalPrice).toFixed(2);
             })
@@ -691,6 +731,8 @@ export default {
                     window.location.reload();
                 }
             });
+
+           
         },
 
         editOrder(){
@@ -767,23 +809,23 @@ export default {
                     itemNumber:this.orderlinedata[index].itemNumber
                 };
                 console.log(this.deleteorderline);
-                var config = {
-                    method: "delete",
-                    url: "https://engine.netsupport.dk:8270/orders/v1/deleteline/" +this.mytoken,
-                    headers: {
-                    "Content-Type": "application/json",
-                    },
-                    data: this.deleteorderline
-                };
-                axios(config)
-                .then((response) => {
-                    alert(response.data.status);
-                    this.getorderlinedata();
-                    this.getorderdata();
-                })
-                .catch(function (error) {
-                    alert("invoice detail not updated");
-                });
+                // var config = {
+                //     method: "delete",
+                //     url: "https://engine.netsupport.dk:8270/orders/v1/deleteline/" +this.mytoken,
+                //     headers: {
+                //     "Content-Type": "application/json",
+                //     },
+                //     data: this.deleteorderline
+                // };
+                // axios(config)
+                // .then((response) => {
+                //     alert(response.data.status);
+                //     this.getorderlinedata();
+                //     this.getorderdata();
+                // })
+                // .catch(function (error) {
+                //     alert("invoice detail not updated");
+                // });
 
             }else{
                 alert("Your Data is Safe");
